@@ -14,6 +14,7 @@ import play.mvc.Result;
 import play.mvc.Security;
 import services.ResponseService;
 import views.html.allResponses;
+import views.html.notReady;
 import views.html.response;
 import views.html.thankPage;
 
@@ -53,10 +54,10 @@ public class ResponseController extends Controller {
     @Transactional
     public Result index() {
         List<Field> allFields = JPA.em().createNamedQuery("getAll", Field.class).getResultList();
-        if (allFields.isEmpty()) {
-            return ok("Sorry, we do not working yet");
-        }
         List<Field> fields = service.removeIsNotActive(allFields);
+        if (fields.isEmpty()) {
+            return ok(notReady.render());
+        }
         return ok(response.render(fields));
     }
 
