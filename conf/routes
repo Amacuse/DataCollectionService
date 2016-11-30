@@ -1,0 +1,29 @@
+# Routes
+
+# Home page
+GET           /                                   controllers.ResponseController.index
+POST          /                                   controllers.ResponseController.getResponse
+GET           /responses                          controllers.ResponseController.getAll
+
+# Login page
+GET           /login                              controllers.Login.login
+GET           /logout                             controllers.Login.logout
+POST          /loginCheck                         controllers.Login.loginCheck
+
+# Field access page
+GET           /fields                             controllers.AdminController.fields
+GET           /fields/                            controllers.AdminController.createField
+GET           /fields/:id                         controllers.AdminController.editField(id: Long)
+
+# FieldController page
+POST          /field/:id                          controllers.FieldController.postField(id: Long)
+DELETE        /field/:id                          controllers.FieldController.deleteField(id: Long)
+
+# WebSocketController page
+GET           /eventWs                            controllers.WebSocketController.eventWs
+GET           /assets/javascripts/event.js        controllers.WebSocketController.eventJs
+
+GET           /javascriptRoutes                   controllers.Application.javascriptRoutes
+
+# Map static resources from the /public folder to the /assets URL path
+GET           /assets/*file                       controllers.Assets.versioned(path="/public", file)

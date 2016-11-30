@@ -1,0 +1,66 @@
+@(fieldForm: Form[models.FieldDto], id: Long)
+
+@import helper._
+@import b3.vertical.fieldConstructor
+
+@adminMain {
+    <p>Create/Edit Field</p>
+
+    @form(routes.FieldController.postField(id), 'id -> "field_edit_form") {
+        <div class="row">
+            <div class="col-xs-4">
+            @b3.text(fieldForm("label"), '_label -> "Label*:")
+            </div>
+
+            <div class="col-xs-2">
+            </div>
+
+            <div class="col-xs-2">
+            @b3.checkbox(fieldForm("required"),
+                '_label -> "Required")
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col-xs-4 form-group">
+                <label>Type*:</label>
+                <select id="select" class="form-control"
+                name="@fieldForm("fieldType").name()" onchange="showOptions(this)" onfocus="showOptions(this)" autofocus>
+                @for(f <- Type.asList()) {
+                    <option value="@f"
+                    @if(f.equals(fieldForm.value().get().fieldType)) {selected}> @f </option>
+                }
+                </select>
+            </div>
+
+            <div class="col-xs-2">
+            </div>
+
+            <div class="col-xs-2">
+            @b3.checkbox(fieldForm("isActive"),
+                '_label -> "Is Active")
+            </div>
+        </div>
+
+        <div class="row" id="options" style="display: none;">
+            <div class="col-xs-4 form-group">
+            @b3.textarea(fieldForm("options"),
+                '_label -> "Options*.",
+                'rows -> 5)
+            </div>
+        </div>
+        <br>
+
+        <div >
+            <button id="field_edit_submit" type="submit" class="btn btn-md btn-primary">
+                <span class="glyphicon glyphicon-floppy-disk">Save</span>
+            </button>
+            <a href="@routes.AdminController.fields()" TYPE="button" class="btn btn-md btn-primary">
+                <span class="glyphicon glyphicon-remove">Cancel</span>
+            </a>
+        </div>
+    }
+}

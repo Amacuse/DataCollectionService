@@ -1,0 +1,53 @@
+@(fields: List[models.Field])
+
+@adminMain {
+    <div>
+        <a href="@routes.AdminController.createField()" class="btn btn-primary btn-md">
+            <span class="glyphicon glyphicon-plus">Add Field</span>
+        </a>
+    </div>
+    <br>
+    <div class="panel panel-primary">
+        <table id="acrylic" class="table">
+            <thead>
+                <tr>
+                    <th>Label</th>
+                    <th>Type</th>
+                    <th>Required</th>
+                    <th>Is Active</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            @for(field <- fields) {
+                <tr>
+                    <td>@field.label</td>
+                    <td>@field.fieldType</td>
+                    <td>
+                    @if(field.required) {
+                        <span class="glyphicon glyphicon-ok"></span>
+                    } else {
+                        <span class="glyphicon glyphicon-minus"></span>
+                    }
+                    </td>
+                    <td>
+                    @if(field.isActive) {
+                        <span class="glyphicon glyphicon-ok"></span>
+                    } else {
+                        <span class="glyphicon glyphicon-minus"></span>
+                    }
+                    </td>
+                    <td><a href="@routes.AdminController.editField(field.id.toLong)">
+                        <span class="glyphicon glyphicon-cog">edit</span></a>
+                    </td>
+
+                    <td><a onclick="del('@field.id')">
+                        <span class="glyphicon glyphicon-remove">delete</span></a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}

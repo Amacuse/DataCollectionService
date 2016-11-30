@@ -1,0 +1,168 @@
+@(fields: List[models.Field])
+
+@import b3.vertical.fieldConstructor
+@import helper._
+
+@main {
+    @b3.form(routes.ResponseController.getResponse()) {
+        @for(f <- fields) {
+
+            @f.fieldType match {
+
+                case Type.SINGLE_LINE_TEXT => {
+
+                    <div class="row">
+                        <div class="col-xs-5">
+
+                            <div class="form-group">
+                                <label>@f.label</label>
+                                <input type="text" class="form-control" name="@{
+                                    f.id.toString + ";" + f.fieldType
+                                }"
+                                @if(f.required) {required}>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                case Type.MULTI_LINE_TEXT => {
+
+                    <div class="row">
+                        <div class="col-xs-5">
+
+                            <div class="form-group">
+                                <label>@f.label</label>
+                                <textarea class="form-control" rows="5"
+                                name="@{
+                                    f.id.toString + ";" + f.fieldType
+                                }"
+                                @if(f.required) {required}></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+                case Type.RADIO_BUTTON => {
+
+                    <div class="row">
+                        <div class="col-xs-5">
+
+                            <label>@f.label</label>
+                            @for(c <- f.content) {
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="@{
+                                            f.id.toString + ";" + f.fieldType
+                                        }" value="@c.content"
+                                        @if(f.required) {required}>@c.content
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+
+                case Type.CHECK_BOX => {
+
+                    <div class="row">
+                        <div class="col-xs-5">
+
+                            <div class="form-group">
+
+                                <label>@f.label</label>
+                                @for(c <- f.content) {
+                                    <div class="checkbox">
+                                        <label><input type="checkbox"
+                                        name="@{
+                                            f.id.toString + ";" + f.fieldType + "[]"
+                                        }"
+                                        value="@c.content">@c.content
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+                case Type.COMBO_BOX => {
+
+                    <div class="row">
+                        <div class="col-xs-5">
+
+                            <div class="form-group">
+
+                                <label>@f.label</label>
+                                <select class="form-control"
+                                name="@{
+                                    f.id.toString + ";" + f.fieldType
+                                }"
+                                @if(f.required) {required}>
+                                @for(c <- f.content) {
+                                    <option value="@c.content">@c.content</option>
+                                }
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+
+                case Type.DATE => {
+
+                    <div class="row">
+                        <div class="col-xs-5">
+
+                            <div class="form-group">
+                                <label>@f.label</label>
+                                <input type="date" class="form-control"
+                                name="@{
+                                    f.id.toString + ";" + f.fieldType
+                                }"
+                                @if(f.required) {required}>
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+
+                case Type.SLIDER => {
+
+                    <div class="row">
+                        <div class="col-xs-5">
+
+                            <div class="form-group">
+                                <label>@f.label</label>
+                                <input type="range" class="form-control"
+                                min="0" max="100" value="50"
+                                name="@{
+                                    f.id.toString + ";" + f.fieldType
+                                }"
+                                @if(f.required) {required}>
+                            </div>
+
+                        </div>
+                    </div>
+
+                }
+            }
+        }
+        <div class="row">
+            <div class="col-xs-5">
+            @b3.free() {
+                <button type="submit" class="btn btn-md btn-primary">
+                    <span class="glyphicon glyphicon-floppy-disk">Submit</span>
+                </button>
+
+                <button type="reset" class="btn btn-md btn-primary">
+                    <span class="glyphicon glyphicon-remove">Reset</span>
+                </button>
+            }
+            </div>
+        </div>
+    }
+}

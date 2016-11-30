@@ -1,0 +1,29 @@
+@(admin: Form[models.Admin])
+@import b3.vertical.fieldConstructor
+@import helper._
+
+@main {
+    <div class="row vertical-offset-100">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Please sign in</h3>
+                </div>
+                <div class="panel-body">
+                @form(routes.Login.loginCheck(), 'class -> "form-group", 'role -> "form") {
+                    <fieldset>
+                        @b3.text(admin("login"), 'placeholder -> "Login")
+                        @b3.password(admin("password"), 'placeholder -> "Password")
+                        @if(admin.hasErrors) {
+                            <span class="text-danger">@{
+                                admin.error("loginError").message()
+                            }</span>
+                        }
+                        <button TYPE="submit" class="btn btn-lg btn-success btn-block">Sign in</button>
+                    </fieldset>
+                }
+                </div>
+            </div>
+        </div>
+    </div>
+}

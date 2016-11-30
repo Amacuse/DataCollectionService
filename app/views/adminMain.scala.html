@@ -1,0 +1,32 @@
+@(content: Html)
+
+<!DOCTYPE html>
+
+@main {
+    <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button TYPE="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <a href="@routes.AdminController.fields()" class="btn btn-primary btn-xs navbar-btn"
+                role="button"><span>Fields</span></a>
+                <a href="@routes.ResponseController.getAll()" class="btn btn-primary btn-xs navbar-btn"
+                role="button">Responses <span class="badge">@ResponseController.COUNT</span></a>
+                <div class="navbar-brand navbar-right">
+                    <a href="@routes.Login.logout" class="btn btn-primary btn-xs" role="button">
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    @content
+
+}
