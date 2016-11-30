@@ -1,14 +1,14 @@
 # Routes
 
-# Home page
-GET           /                                   controllers.ResponseController.index
-POST          /                                   controllers.ResponseController.getResponse
-GET           /responses                          controllers.ResponseController.getAll
-
 # Login page
 GET           /login                              controllers.Login.login
 GET           /logout                             controllers.Login.logout
 POST          /loginCheck                         controllers.Login.loginCheck
+
+# Home page
+GET           /                                   controllers.ResponseController.index
+POST          /                                   controllers.ResponseController.getResponse
+GET           /responses                          controllers.ResponseController.getAll
 
 # Field access page
 GET           /fields                             controllers.AdminController.fields

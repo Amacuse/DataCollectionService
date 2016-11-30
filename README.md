@@ -18,3 +18,13 @@ After you have added activator to your path, run the following command in the pr
 activator run
 ```
 
+As admin you should start from
+
+http://localhost:9000/fields
+
+or
+
+http://localhost:9000/login
+
+Login: admin
+Password: admin

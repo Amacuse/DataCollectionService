@@ -53,6 +53,9 @@ public class ResponseController extends Controller {
     @Transactional
     public Result index() {
         List<Field> allFields = JPA.em().createNamedQuery("getAll", Field.class).getResultList();
+        if (allFields.isEmpty()) {
+            return ok("Sorry, we do not working yet");
+        }
         List<Field> fields = service.removeIsNotActive(allFields);
         return ok(response.render(fields));
     }
