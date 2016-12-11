@@ -1,13 +1,15 @@
 package models;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * An enum which presents types which can be chosen
  * for a particular {@link Field}. Each {@link Type} has it is own {@code String}
  * representation adapted for a user.
+ * There is a TYPE_MAP field which will be used to make 'option - value' pairs
+ * on the {@link views.html.fieldEdit} page
  */
 public enum Type {
     SINGLE_LINE_TEXT {
@@ -53,6 +55,14 @@ public enum Type {
         }
     };
 
+    public static final Map<String, String> TYPE_MAP = new LinkedHashMap<>();
+
+    static {
+        Arrays.asList(Type.values()).
+                forEach(type ->
+                        TYPE_MAP.put(type.toString(), type.toString()));
+    }
+
     /**
      * Converts a {@code String} representation of this {@link Type}.
      *
@@ -69,15 +79,5 @@ public enum Type {
             }
         }
         return Type.valueOf(tmp);
-    }
-
-    /**
-     * A convenient method to get a {@code List<String>} of the {@link Type}.
-     *
-     * @return A {@code List<String>} which represent this {@link Type}
-     */
-    public static List<String> asList() {
-        return Arrays.stream(Type.values())
-                .map(Enum::toString).collect(Collectors.toList());
     }
 }
