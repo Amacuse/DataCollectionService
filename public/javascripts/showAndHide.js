@@ -1,9 +1,22 @@
-function showOptions(elem) {
-    if (elem.value == "Radio button" || elem.value == "Check box" || elem.value == "Combo box") {
-        document.getElementById('options').style.display = "block";
+$(function () {
+    hideOrShow();
+
+    $('#type').change(function () {
+        hideOrShow()
+    });
+
+});
+
+function hideOrShow() {
+    var type = $('#type').val();
+    if (type == "Radio button" || type == "Check box" || type == "Combo box") {
+        $('#options').fadeIn('slow');
     } else {
-        document.getElementById('options').style.display = "none";
+        $('#options').fadeOut('slow');
     }
 }
+
+
+
 
 
