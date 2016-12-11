@@ -10,9 +10,9 @@ $(function () {
 function hideOrShow() {
     var type = $('#type').val();
     if (type == "Radio button" || type == "Check box" || type == "Combo box") {
-        $('#options').fadeIn('slow');
+        $('#options').slideDown('slow');
     } else {
-        $('#options').fadeOut('slow');
+        $('#options').slideUp('slow');
     }
 }
 
